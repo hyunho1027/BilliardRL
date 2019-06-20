@@ -1,6 +1,8 @@
 # BilliardRL
-![Alt text](./resrc/billiardRL.gif)
+
+<center><img src=./resrc/BilliardRL.gif width=80%></center>
+
 
 ---
-Will be updated.
+contents will be updated.
 
