@@ -1,6 +1,6 @@
 # BilliardRL
 
-<center><img src=./resrc/BilliardRL.gif width=80%></center>
+<center><img src="./resrc/BilliardRL.gif" width=80%></center>
 
 
 ---
