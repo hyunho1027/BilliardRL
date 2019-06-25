@@ -38,6 +38,8 @@ Agent hit the white ball or nothing | -1 | True
 Agent hit the only one red ball | 0 | True
 Agent hit the only two red balls | 1 | False
 
+if episode ends, all ball positions are randomly changed.
+
 # Installation
 ```cmd
 git clone https://github.com/hyunho1027/BillardRL
