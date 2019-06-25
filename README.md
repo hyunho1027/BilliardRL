@@ -24,6 +24,10 @@ shape: (128, 64, 3)
 
 ## Action
 There are 2 actions, theta(vectorAction[0]) and power(vectorAction[1]).  
+
+<img src="./resrc/actions.png" width=256>
+
+
 vectorActions are processed in the environment as follows. 
 
 theta = clip(vectorAction[0], 0, 1) * 2π   
