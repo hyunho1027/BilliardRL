@@ -23,10 +23,9 @@ shape: (128, 64, 3)
 (Y: yellow, W: white, R: red, x ∈ [-8.5, 8.5] , z ∈ [-18, 18])
 
 ## Action
-There are 2 actions, theta(vectorAction[0]) and power(vectorAction[1]).  
-
 <img src="./resrc/actions.png" width=256>
 
+There are 2 actions, theta(vectorAction[0]) and power(vectorAction[1]).  
 
 vectorActions are processed in the environment as follows. 
 
