@@ -6,16 +6,6 @@
 ## Introduction
 This is a billiard environment, built with Unity.
 
-## Installation
-```cmd
-git clone https://github.com/hyunho1027/BillardRL
-```
-
-### Requirements
-- Python 3.6
-- Unity ML-Agents v0.8
-
-## Environment Settings
 ### Agent
 The yellow ball is a agent.
 
@@ -48,3 +38,17 @@ Agent hit the white ball or nothing | -1 | True
 Agent hit the only one red ball | 0 | True
 Agent hit the only two red balls | 1 | False
 
+## Installation
+```cmd
+git clone https://github.com/hyunho1027/BillardRL
+```
+
+### Requirements
+- Python 3.6
+- Unity ML-Agents v0.8
+
+### Usage
+
+```cmd
+jupyter notebook getting-started.ipynb
+```
