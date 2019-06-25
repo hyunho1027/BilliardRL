@@ -1,11 +1,11 @@
+# BilliardRL
+
 <p align="center">
     <img src="./resrc/billiardRL.gif" width=70%>
 </p>
 
-# BilliardRL
+# Introduction
 This is a billiard environment, built with Unity.
-
-# About
 
 ## Agent
 The yellow ball is a agent.
