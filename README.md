@@ -32,7 +32,7 @@ vectorActions are processed in the environment as follows.
 theta = clip(vectorAction[0], 0, 1) * 2π   
 power = clip(vectorAction[1], 1e-4, 1) * 2000
 
-(**Note: If you put 0 in power, environment can't recognize it.**)
+(**Note: If you put 0 in power, environment will ignore it.**)
 
 ## Reward
 Case | Point | Terminal
