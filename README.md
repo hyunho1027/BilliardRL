@@ -13,7 +13,7 @@ The yellow ball is a agent.
 This environment provides both visual observation and vector observation.
 
 ### Visual Observation
-<img src="./resrc/visualobservation.png" width=64>
+<img src="./resrc/visualobservation.png" width=256>
 
 shape: (128, 64, 3)
 
