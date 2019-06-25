@@ -20,7 +20,7 @@ shape: (128, 64, 3)
 ### Vector Observation
 [Y.x, Y.z, W.x, W.z, R1.x, R1.z, R2.x, R2.y]
 
-( Y: yellow, W: white, R: red, x ∈ [-8.5, 8.5] , z ∈ [-18, 18])
+(Y: yellow, W: white, R: red, x ∈ [-8.5, 8.5] , z ∈ [-18, 18])
 
 ## Action
 There are 2 actions, theta(vectorAction[0]) and power(vectorAction[1]).  
