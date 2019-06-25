@@ -4,11 +4,9 @@
 
 # BilliardRL
 ## Introduction
----
 This is a billiard environment, built with Unity.
 
 ## Installation
----
 ```cmd
 git clone https://github.com/hyunho1027/BillardRL
 ```
@@ -18,7 +16,6 @@ git clone https://github.com/hyunho1027/BillardRL
 - Unity ML-Agents v0.8
 
 ## Environment Settings
----
 ### Agent
 The yellow ball is a agent.
 
