@@ -3,8 +3,9 @@
 </p>
 
 # BilliardRL
-# Introduction
 This is a billiard environment, built with Unity.
+
+# About
 
 ## Agent
 The yellow ball is a agent.
