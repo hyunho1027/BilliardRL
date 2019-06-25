@@ -24,7 +24,7 @@ shape: (128, 64, 3)
 
 ## Action
 There are 2 actions, theta(vectorAction[0]) and power(vectorAction[1]).  
-Actions are processed in the environment as follows. 
+vectorActions are processed in the environment as follows. 
 
 theta = clip(vectorAction[0], 0, 1) * 2π   
 power = clip(vectorAction[1], 1e-4, 1) * 2000
