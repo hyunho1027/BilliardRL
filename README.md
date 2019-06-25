@@ -32,7 +32,7 @@ power = clip(vectorAction[1], 1e-4, 1) * 2000
 (**Note: If you put 0 in power, environment can't recognize it.**)
 
 ## Reward
-Condition | Point | Terminal
+Case | Point | Terminal
 :---: | :---: | :---:
 Agent hit the white ball or nothing | -1 | True
 Agent hit the only one red ball | 0 | True
