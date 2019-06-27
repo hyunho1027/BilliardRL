@@ -53,7 +53,7 @@ git clone https://github.com/hyunho1027/BillardRL
 
 ## Requirements
 - Python 3.6
-- Unity ML-Agents v0.8
+- mlagents 0.8
 
 ## Usage
 
