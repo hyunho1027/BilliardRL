@@ -19,6 +19,8 @@ This environment provides both visual observation and vector observation.
 shape: (128, 64, 3)
 
 ### Vector Observation
+<img src="./resrc/vectorobservation.png" width=256>
+
 [Y.x, Y.z, W.x, W.z, R1.x, R1.z, R2.x, R2.y]
 
 (Y: yellow, W: white, R: red, x ∈ [-8.5, 8.5] , z ∈ [-18, 18])
