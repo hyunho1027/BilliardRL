@@ -24,9 +24,8 @@ load_model = False
 train_mode = True
 
 load_path = ""
-save_path = "./saved_model/ppo/" + datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-log_dir = "./summary/ppo/" + datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-save_interval = 100
+save_path = "./summary/ppo/" + datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+save_interval = 1
 
 
 class Model:
@@ -111,7 +110,7 @@ class PPOAgent:
         return a, v, logp_pi
 
     def save_model(self):
-        self.saver.save(self.sess, save_path + "_model.ckpt")
+        self.saver.save(self.sess, save_path + "/model.ckpt")
     
     def make_summary(self):
         self.summary_v_loss = tf.placeholder(tf.float32)
@@ -122,7 +121,7 @@ class PPOAgent:
         tf.summary.scalar("kl_divergence", self.summary_kl)
         tf.summary.scalar("entropy", self.summary_ent)
         tf.summary.scalar("reward", self.summary_r)
-        return tf.summary.FileWriter(logdir=log_dir, graph=self.sess.graph), tf.summary.merge_all()
+        return tf.summary.FileWriter(logdir=save_path, graph=self.sess.graph), tf.summary.merge_all()
 
     def write_summary(self, v_loss, kl, ent, r, rollout):
             self.summary.add_summary(self.sess.run(self.merge,  feed_dict={self.summary_v_loss: v_loss,
@@ -177,5 +176,5 @@ if __name__ == '__main__' :
         print(f"{rollout} Rollout / Value Loss : {v_loss:.3f} / KL div : {kl:.3f} / Entropy : {ent:.3f} / Recent Reward : {np.mean(recent_rs):.3f}")
 
         if train_mode and rollout % save_interval == 0:
-            print("Model saved at", save_path)
+            print("Model saved.")
             agent.save_model()
