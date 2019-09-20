@@ -9,7 +9,7 @@ np.set_printoptions(precision=3)
 np.random.seed(1)
 tf.set_random_seed(1)
 
-vis_mode = False
+vis_mode = True
 s_size = [128, 64, 3] if vis_mode else [8]
 a_size = 2
 
@@ -25,7 +25,7 @@ train_mode = True
 
 load_path = ""
 save_path = "./summary/ppo/" + datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-save_interval = 1
+save_interval = 100
 
 
 class Model:
