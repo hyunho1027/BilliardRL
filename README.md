@@ -21,7 +21,7 @@ shape: (128, 64, 3)
 ### Vector Observation
 <img src="./resrc/vectorobservation.png" width=256>
 
-[Y.x, Y.z, W.x, W.z, R1.x, R1.z, R2.x, R2.y]
+[Y.x, Y.z, W.x, W.z, R1.x, R1.z, R2.x, R2.z]
 
 (Y: yellow, W: white, R: red, x ∈ [-8.5, 8.5] , z ∈ [-18, 18])
 
@@ -44,7 +44,7 @@ Agent hit the white ball or nothing | -1 | True
 Agent hit the only one red ball | 0 | True
 Agent hit the only two red balls | 1 | False
 
-if episode ends, all ball positions are randomly changed.
+If episode ends, all ball positions are randomly changed.
 
 # Installation
 ```cmd
