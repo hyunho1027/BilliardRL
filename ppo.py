@@ -3,7 +3,7 @@ import numpy as np
 from collections import deque
 from mlagents.envs import UnityEnvironment
 import datetime
-from utils import gaussian_likelihood, get_gaes, logit
+from utils import gaussian_likelihood, get_gaes, logit, clip_b4_exp
 
 np.set_printoptions(precision=3)
 np.random.seed(1)
@@ -61,8 +61,8 @@ class Model:
             ## Actor
             self.mu = tf.layers.dense(self.fc3, a_size)
             self.log_std = tf.get_variable("log_std", initializer=-0.5*np.ones(a_size, np.float32))
-            self.std = tf.exp(self.log_std)
-            self.pi = tf.sigmoid(self.mu + tf.random_normal(tf.shape(self.mu))*self.std)
+            self.std = tf.exp(clip_b4_exp(self.log_std))
+            self.pi = tf.sigmoid(clip_b4_exp(tf.random_normal(tf.shape(self.mu), self.mu, self.std)))
             self.logp = gaussian_likelihood(logit(self.a), self.mu, self.log_std)
             self.logp_pi = gaussian_likelihood(self.pi, self.mu, self.log_std)
 
@@ -148,7 +148,7 @@ if __name__ == '__main__' :
             env_info = env.step(a)[default_brain]
             r = env_info.rewards[0]
             d = env_info.local_done[0]
-            # print(rollout, "Rollout", step+1, "Step:", "\nState:", s, "\nAction:", a, "Reward:", r, "Done:", d)
+            print(rollout, "Rollout", step+1, "Step:", "\nState:, s", "\nAction:", a, "Reward:", r, "Done:", d)
             recent_rs.append(r)
             if step == 0:
                 s_list, a_list, v_list, d_list, r_list, logp_t_list = [s], [a], [v_t], [d], [r], [logp_t]
