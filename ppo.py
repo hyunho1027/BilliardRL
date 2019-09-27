@@ -68,7 +68,7 @@ class Net:
             self.logp_pi = gaussian_likelihood(self.pi, self.mu, self.log_std)
 
             ## Critic
-            self.v = tf.squeeze(tf.layers.dense(clip_b4_exp(self.fc3), 1, tf.nn.tanh), axis=1)
+            self.v = tf.squeeze(tf.tanh(clip_b4_exp(tf.layers.dense(self.fc3, 1))), axis=1)
 
 class PPOAgent:
     def __init__(self):

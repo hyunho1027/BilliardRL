@@ -73,7 +73,7 @@ class Actor():
                 
             self.fc2 = tf.layers.dense(self.fc1, 128, tf.nn.leaky_relu)
             self.fc3 = tf.layers.dense(self.fc2, 128, tf.nn.leaky_relu)
-            self.a = tf.layers.dense(clip_b4_exp(self.fc3), a_size, tf.nn.sigmoid)
+            self.a = tf.sigmoid(clip_b4_exp(tf.layers.dense(self.fc3, a_size)))
 
         self.trainable_var = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, name)
 
@@ -104,7 +104,7 @@ class Critic():
             self.concat = tf.concat([self.fc1, self.a],axis=-1)
             self.fc2 = tf.layers.dense(self.concat, 128, tf.nn.leaky_relu)
             self.fc3 = tf.layers.dense(self.fc2, 128, tf.nn.leaky_relu)
-            self.q = tf.squeeze(tf.layers.dense(clip_b4_exp(self.fc3), 1, tf.nn.tanh), axis=1)
+            self.q = tf.squeeze(tf.tanh(clip_b4_exp(tf.layers.dense(self.fc3, 1))))
 
         self.trainable_var = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, name)
 
