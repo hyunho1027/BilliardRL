@@ -170,7 +170,7 @@ class DDPGAgent:
     def get_action(self, s, train_mode):
         a = self.sess.run(self.actor.a, feed_dict={self.actor.s: s})
         noise = self.OU.sample()
-        return a if train_mode else a + noise
+        return a + noise if train_mode else a
     
     def append_sample(self, s, a, r, next_s, d):
         self.memory.append((s, a, r, next_s, d))
