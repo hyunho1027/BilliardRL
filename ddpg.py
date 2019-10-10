@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 from collections import deque
+import heapq
 import random
 from mlagents.envs import UnityEnvironment
 import datetime
@@ -18,15 +19,15 @@ batch_size = 256
 
 tau = 1e-3
 actor_lr = 5e-5
-critic_lr = 3e-4
+critic_lr = 2e-4
 discount_factor = 0.9
 
-train_start_step = 1000
+train_start_step = 5000
 mem_maxlen = 50000
 
 mu = 0
-theta = 0.01
-sigma = 0.02
+theta = 1e-3
+sigma = 2e-3
 
 load_model = False
 train_mode = True
@@ -127,12 +128,14 @@ class DDPGAgent:
         with tf.control_dependencies(self.actor.trainable_var):
             self.train_actor = tf.train.AdamOptimizer(actor_lr).apply_gradients(zip(policy_grad, self.actor.trainable_var))
 
-        self.sess = tf.Session()
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
+        self.sess = tf.Session(config = config)
         self.sess.run(tf.global_variables_initializer())
         self.saver = tf.train.Saver()
         self.summary, self.merge = self.make_summary()
         self.OU = OU_noise()
-        self.memory = deque(maxlen=mem_maxlen)
+        self.memory = []
 
         self.soft_update_target = []
         for idx in range(len(self.actor.trainable_var)):
@@ -151,11 +154,11 @@ class DDPGAgent:
 
     def train_model(self):
         mini_batch = random.sample(self.memory, batch_size)
-        states = np.asarray([sample[0] for sample in mini_batch])
-        actions = np.asarray([sample[1] for sample in mini_batch])
-        rewards = np.asarray([sample[2] for sample in mini_batch])
-        next_states = np.asarray([sample[3] for sample in mini_batch])
-        dones = np.asarray([sample[4] for sample in mini_batch])
+        states = np.asarray([sample[2][0] for sample in mini_batch])
+        actions = np.asarray([sample[2][1] for sample in mini_batch])
+        rewards = np.asarray([sample[2][2] for sample in mini_batch])
+        next_states = np.asarray([sample[2][3] for sample in mini_batch])
+        dones = np.asarray([sample[2][4] for sample in mini_batch])
 
         target_actor_as= self.sess.run(self.target_actor.a, feed_dict={self.target_actor.s: next_states})
         target_critic_qs = self.sess.run(self.target_critic.q, feed_dict={self.target_critic.s: next_states, self.target_critic.a: target_actor_as})
@@ -173,7 +176,9 @@ class DDPGAgent:
         return a + noise if train_mode else a
     
     def append_sample(self, s, a, r, next_s, d):
-        self.memory.append((s, a, r, next_s, d))
+        if len(self.memory) == mem_maxlen:
+            heapq.heappop(self.memory)
+        heapq.heappush(self.memory, (r, random.random(), (s, a, r, next_s, d)))
    
     def save_model(self):
         self.saver.save(self.sess, save_path + "/model.ckpt")
@@ -188,12 +193,12 @@ class DDPGAgent:
 
 if __name__ == '__main__' :
     env_name = "./env/Billiard"
-    env = UnityEnvironment(file_name=env_name)
+    env = UnityEnvironment(file_name=env_name, worker_id=1)
     default_brain = env.brain_names[0]
     agent = DDPGAgent()
 
     episode = 0
-    recent_rs = deque(maxlen=100)
+    recent_rs = deque(maxlen=1000)
     while True:
         episode += 1
         env_info = env.reset(train_mode=train_mode)[default_brain]
@@ -211,7 +216,7 @@ if __name__ == '__main__' :
             if train_mode:
                 s_augs, a_augs, next_s_augs = vis_data_augmentation(s, a, next_s) if vis_mode else vec_data_augmentation(s, a, next_s)
                 for s_aug, a_aug, next_s_aug in zip(s_augs, a_augs, next_s_augs):
-                    agent.append_sample(s_aug, a_aug, r, next_s_aug, d)
+                    agent.append_sample(s_aug, a_aug, r+1, next_s_aug, d)
 
                 if len(agent.memory) >= train_start_step:
                     agent.train_model()

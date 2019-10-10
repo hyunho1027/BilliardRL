@@ -89,6 +89,9 @@ class PPOAgent:
         self.approx_kl = tf.reduce_mean(self.logp_old-self.net.logp)
         self.approx_ent = tf.reduce_mean(- self.net.logp)
 
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
+        self.sess = tf.Session(config = config)
         self.sess = tf.Session()
         self.sess.run(tf.global_variables_initializer())
         self.saver = tf.train.Saver()
