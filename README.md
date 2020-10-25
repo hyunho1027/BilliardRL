@@ -60,3 +60,7 @@ git clone https://github.com/hyunho1027/BillardRL
 ```cmd
 jupyter notebook getting-started.ipynb
 ```
+
+## Reference
+
+https://github.com/RLOpensource/tensorflow_RL
