@@ -46,21 +46,18 @@ Agent hit the only two red balls | 1 | False
 
 If episode ends, all ball positions are randomly changed.
 
-# Installation
+
+## Requirements
+- Python3
+
+## Installation
 ```cmd
 git clone https://github.com/hyunho1027/BillardRL
 ```
 
-## Requirements
-- Python 3.6
-- mlagents 0.8
-
 ## Usage
-
 ```cmd
-jupyter notebook getting-started.ipynb
+pip install -r requirements.txt
+python main.py
+
 ```
-
-## Reference
-
-https://github.com/RLOpensource/tensorflow_RL
