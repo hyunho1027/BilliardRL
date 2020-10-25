@@ -59,5 +59,4 @@ git clone https://github.com/hyunho1027/BillardRL
 ```cmd
 pip install -r requirements.txt
 python main.py
-
 ```

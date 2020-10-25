@@ -29,10 +29,8 @@ print("Agent state looks like: \n{}".format(env_info.vector_observations[0]))
 # Examine the observation space for the default brain
 for observation in np.array(env_info.visual_observations):
     print("Agent observations look like:")
-    if observation.shape[3] == 3:
-        plt.imshow(observation[0,:,:,:])
-    else:
-        plt.imshow(observation[0,:,:,0])
+    plt.imshow(observation[0,:,:,:])
+    plt.pause(1)
 
 for episode in range(100):
     env_info = env.reset(train_mode=train_mode)[default_brain]
