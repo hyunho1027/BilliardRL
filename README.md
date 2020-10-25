@@ -46,8 +46,8 @@ Agent hit the only two red balls | 1 | False
 
 If episode ends, all ball positions are randomly changed.
 
-
-## Requirements
+## Environments
+- Windows10
 - Python3
 
 ## Installation
