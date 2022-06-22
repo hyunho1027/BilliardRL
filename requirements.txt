@@ -3,7 +3,7 @@ cycler==0.10.0
 grpcio==1.33.1
 kiwisolver==1.2.0
 matplotlib==3.3.2
-numpy==1.19.2
+numpy==1.22.0
 Pillow==8.2.0
 protobuf==3.13.0
 pyparsing==2.4.7
